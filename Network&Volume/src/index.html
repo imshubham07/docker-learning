@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture Flowchart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        #diagram {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            font-weight: 600;
+            margin: 0 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .instructions {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin: 8px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏛️ System Architecture Flowchart</h1>
+        <p class="subtitle">Educational Management System - Multi-Layer Architecture</p>
+        
+        <div id="diagram">
+            <div class="mermaid">
+graph TD
+    subgraph Users["👥 End Users"]
+        A1[Admin]
+        A2[Faculty]
+        A3[Students]
+    end
+
+    subgraph UI["💻 User Interface Layer"]
+        B1[Web Portal]
+        B2[Mobile Client]
+    end
+
+    subgraph AppLayer["🔐 Application Layer"]
+        C1[Authentication Module]
+        C2[Role Management Module]
+        C3[API Gateway]
+    end
+
+    subgraph CoreEngines["⚙️ Core Engines"]
+        direction TB
+        
+        subgraph TimetableEngine["📅 Timetable Scheduling Engine"]
+            D1[Constraint Solver]
+            D2[Genetic Algorithm Optimization]
+            D3[Clash Detection]
+        end
+        
+        subgraph AttendanceEngine["✅ Attendance Processing Engine"]
+            E1[Input Parser]
+            E2[Record Generator]
+            E3[Analytics Module]
+        end
+        
+        subgraph FileEngine["📁 File Workflow System"]
+            F1[Upload Handler]
+            F2[Approval Pipeline]
+            F3[Distribution Module]
+        end
+        
+        subgraph NotificationEngine["🔔 Notification & Event Engine"]
+            G1[Trigger Controller]
+            G2[Alerts Manager]
+            G3[Calendar Synchronization]
+        end
+    end
+
+    subgraph Database["🗄️ Database Layer - SQL"]
+        H1[(Users)]
+        H2[(Classes)]
+        H3[(Timetables)]
+        H4[(Attendance)]
+        H5[(Files)]
+        H6[(Logs)]
+    end
+
+    A1 --> B1
+    A1 --> B2
+    A2 --> B1
+    A2 --> B2
+    A3 --> B1
+    A3 --> B2
+
+    B1 --> C1
+    B2 --> C1
+    C1 --> C2
+    C2 --> C3
+
+    C3 --> TimetableEngine
+    C3 --> AttendanceEngine
+    C3 --> FileEngine
+    C3 --> NotificationEngine
+
+    D1 --> D2
+    D2 --> D3
+
+    E1 --> E2
+    E2 --> E3
+
+    F1 --> F2
+    F2 --> F3
+
+    G1 --> G2
+    G2 --> G3
+
+    TimetableEngine --> H3
+    TimetableEngine --> H2
+    AttendanceEngine --> H4
+    AttendanceEngine --> H2
+    FileEngine --> H5
+    NotificationEngine --> H6
+    
+    C1 --> H1
+    C2 --> H1
+
+    classDef userStyle fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    classDef uiStyle fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef appStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef engineStyle fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef dbStyle fill:#ffebee,stroke:#c62828,stroke-width:2px
+    
+    class A1,A2,A3 userStyle
+    class B1,B2 uiStyle
+    class C1,C2,C3 appStyle
+    class D1,D2,D3,E1,E2,E3,F1,F2,F3,G1,G2,G3 engineStyle
+    class H1,H2,H3,H4,H5,H6 dbStyle
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="downloadAsSVG()">📥 Download as SVG</button>
+            <button onclick="downloadAsPNG()">📥 Download as PNG</button>
+            <button onclick="downloadAsJPG()">📥 Download as JPG</button>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 How to Download:</h3>
+            <ol>
+                <li>Click <strong>"Download as SVG"</strong> for vector format (scalable, best quality)</li>
+                <li>Or click <strong>"Download as PNG"</strong> for raster image format</li>
+                <li>Check your Downloads folder for the file</li>
+                <li><strong>To convert to JPG:</strong> Open the downloaded file in any image editor and save as JPG</li>
+            </ol>
+            <p><strong>Tip:</strong> SVG format maintains perfect quality at any size and works great for presentations and documents.</p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        function _getRenderedSvg() {
+            return document.querySelector('#diagram svg');
+        }
+
+        function _prepareSvgClone(svg) {
+            const clone = svg.cloneNode(true);
+            clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+            let box;
+            try {
+                box = svg.getBBox();
+            } catch (e) {
+                box = { x: 0, y: 0, width: svg.clientWidth || 800, height: svg.clientHeight || 600 };
+            }
+
+            const width = Math.ceil(box.width + Math.abs(box.x) || svg.clientWidth || 800);
+            const height = Math.ceil(box.height + Math.abs(box.y) || svg.clientHeight || 600);
+
+            clone.setAttribute('width', width);
+            clone.setAttribute('height', height);
+            if (!clone.getAttribute('viewBox')) {
+                clone.setAttribute('viewBox', `${box.x} ${box.y} ${box.width} ${box.height}`);
+            }
+
+            return { clone, width, height };
+        }
+
+        function downloadAsSVG() {
+            try {
+                const svgElement = _getRenderedSvg();
+                if (!svgElement) {
+                    alert('Please wait for the diagram to fully render, then try again.');
+                    return;
+                }
+
+                const { clone } = _prepareSvgClone(svgElement);
+                const svgData = new XMLSerializer().serializeToString(clone);
+                const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+
+                const link = document.createElement('a');
+                link.download = 'system_architecture_flowchart.svg';
+                link.href = URL.createObjectURL(blob);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            } catch (error) {
+                console.error('Error downloading SVG:', error);
+                alert('Error creating SVG. Please try taking a screenshot instead.');
+            }
+        }
+
+        function _convertSvgToBlob(mimeType = 'image/png', quality = 0.92, callback) {
+            try {
+                const svgElement = _getRenderedSvg();
+                if (!svgElement) {
+                    callback(new Error('SVG not rendered yet'));
+                    return;
+                }
+
+                const { clone, width, height } = _prepareSvgClone(svgElement);
+
+                const svgData = new XMLSerializer().serializeToString(clone);
+
+                // Use data URI instead of object URL to improve cross-browser compatibility
+                const svgDataUri = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
+
+                const img = new Image();
+                img.onload = function() {
+                    try {
+                        const scale = 2; // improve quality
+                        const canvas = document.createElement('canvas');
+                        canvas.width = Math.max(1, Math.round(width * scale));
+                        canvas.height = Math.max(1, Math.round(height * scale));
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = 'white';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        canvas.toBlob(function(blob) {
+                            if (!blob) {
+                                callback(new Error('Conversion to blob failed'));
+                                return;
+                            }
+                            callback(null, blob);
+                        }, mimeType, quality);
+                    } catch (err) {
+                        callback(err);
+                    }
+                };
+                img.onerror = function(e) {
+                    callback(new Error('Failed to load SVG image'));
+                };
+
+                img.src = svgDataUri;
+            } catch (err) {
+                callback(err);
+            }
+        }
+
+        function downloadAsPNG() {
+            _convertSvgToBlob('image/png', 0.92, function(err, blob) {
+                if (err) {
+                    console.error('Error converting to PNG:', err);
+                    alert('Error creating PNG. Please use the SVG download option instead.');
+                    return;
+                }
+                const link = document.createElement('a');
+                link.download = 'system_architecture_flowchart.png';
+                link.href = URL.createObjectURL(blob);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            });
+        }
+
+        function downloadAsJPG() {
+            _convertSvgToBlob('image/jpeg', 0.92, function(err, blob) {
+                if (err) {
+                    console.error('Error converting to JPG:', err);
+                    alert('Error creating JPG. Please use the SVG download option instead.');
+                    return;
+                }
+                const link = document.createElement('a');
+                link.download = 'system_architecture_flowchart.jpg';
+                link.href = URL.createObjectURL(blob);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            });
+        }
+    </script>
+</body>
+</html>
